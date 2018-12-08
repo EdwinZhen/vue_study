@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="app"></div>
+	<script src="vue/vue.js"></script>
+	<script>
+		var tempComponent = {
+			template:`<div>
+			我是子组件
+				
+			</div>`
+		};
+		Vue.component('tempc',tempComponent);
+		var App = {
+			template: `<div>
+						<tempc ref="tmp"/>
+						<button ref="btn">我是按钮</button>
+					</div>`,
+			beforeCreate: function() {
+				// console.log(this.$refs.btn)
+			},
+			created: function() {
+				// console.log(this.$refs.btn)
+			},
+			beforeMount: function() {
+				// console.log(this.$refs.btn)
+			},
+			mounted: function() {
+				console.log(this.$refs.tmp.$el)
+			}
+		}
+		new Vue({
+			el: '#app',
+			components:{
+				app:App
+			},
+			template: `<app/>`
+		})
+	</script>
+</body>
+</html>

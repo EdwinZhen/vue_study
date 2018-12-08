@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'></div>
+  <script src="vue/vue.js"></script>
+  <script>
+    var myHeader = {
+      template: '<div>我是头部</div>'
+    };
+    var myBody = {
+      template: '<div>我是身体</div>'
+    };
+    var myFooter = {
+      template: '<div>我是底部</div>'
+    };
+    //声明组件
+    var App = {
+      components: {
+        'my_header': myHeader,
+        'my_body': myBody,
+        'my_footer': myFooter,
+      },
+      template: `
+      <div>
+        <my_header></my_header>
+        <my_body></my_body>
+        <my_footer/>
+      </div>
+      `
+    };
+    
+    new Vue({
+      el: document.getElementById('app'),
+      components: { //声明要用的组件们
+        app: App,
+      },
+      template: '<app />',
+      data: function () {
+        return {
+          myValue: '嘻嘻呵呵哈哈',
+        }
+      },
+    })
+  </script>
+</body>
+</html>
