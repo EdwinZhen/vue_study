@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="app"></div>
+
+	<script src="vue/vue.js"></script>
+	<script src="vue/vue-router.js"></script>
+	<script>
+		var Woman = {
+			template: `<div>
+				欢迎女士登录...
+			</div>`
+		}
+		var Man = {
+			template: `<div>
+				欢迎男士登录...
+			</div>`
+		}
+		var Login = {
+			template: `<div>
+				我是login显示的内容，下面是自路由显示的内容
+				<router-link :to="{ name:'login.woman' }">女士登录入口</router-link>
+				<router-link :to="{ name:'login.man' }">男士登录入口</router-link>
+				<router-view></router-view>
+			</div>`
+		}
+		var Register = {
+			template: `<div>
+				我是register显示的内容，下面是自路由显示的内容
+				<router-view></router-view>
+			</div>`
+		}
+		//安装插件
+		Vue.use(VueRouter);
+		//创建路由对象
+		var router = new VueRouter({
+			//配置路由对象
+			routes:[
+			{
+				name: 'login',path: '/login',component:Login,
+				children: [
+					{ name: 'login.woman',path: 'woman',component:Woman },
+					{ name: 'login.man',path: 'man',component:Man }
+				]
+			},
+			{ name: 'register',path: '/register',component: Register}
+			]
+		});
+		var App = {
+			template: `<div>
+				<router-link :to="{ name:'login' }">登录页</router-link>
+				<router-link :to="{ name:'register' }">注册页</router-link>
+				<router-view></router-view>
+			</div>` 
+		}
+		//关联路由对象到vue实例中
+		new Vue({
+			el:'#app',
+			router: router,
+			components: {
+				app: App
+			},
+			template: `<app/>`
+		})
+		//制定路由改变局部的位置
+	</script>
+</body>
+</html>

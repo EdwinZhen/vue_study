@@ -7,16 +7,38 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	
+	<div id="app"></div>
 
 	<script src="vue/vue.js"></script>
 	<script src="vue/vue-router.js"></script>
 	<script>
-		//创建路由对象
-		var router = new VueRouter();
-		//配置路由对象
+		var Login = {
+			template: `<div>我是登录页面</div>`
+		}
+
 		//安装插件
+		Vue.use(VueRouter);
+		//创建路由对象
+		var router = new VueRouter({
+			//配置路由对象
+			routes:[{
+				path: '/login',component:Login
+			}]
+		});
+		var App = {
+			template: `<div>
+				<router-view></router-view>
+			</div>` 
+		}
 		//关联路由对象到vue实例中
+		new Vue({
+			el:'#app',
+			router: router,
+			components: {
+				app: App
+			},
+			template: `<app/>`
+		})
 		//制定路由改变局部的位置
 	</script>
 </body>
